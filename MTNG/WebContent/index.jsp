@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
 <title>Spring MVC Tutorial Series by Crunchify.com</title>

@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
 <title>MTNG Hello World</title>
