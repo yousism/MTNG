@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Spring MVC Tutorial Series by Crunchify.com</title>
+<title>MTNG</title>
 <style type="text/css">
 body {
 	background-image: url('https://crunchify.com/bg.png');
