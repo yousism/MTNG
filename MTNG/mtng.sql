@@ -18,6 +18,7 @@
 --
 -- Table structure for table `Person`
 --
+USE mtng;
 
 DROP TABLE IF EXISTS `Person`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
