@@ -9,14 +9,13 @@ body {
 </head>
 <body>
 	<br>
-	<div style="text-align:center">
+	<div style="text-align: center">
 		<h2>
 			Hello, this is the MTNG sample page.<br> <br>
-		</h2>
-		<h3>
-			<a href="welcome.html">Click here to See Welcome Message... </a>(to
-			check Spring MVC Controller... @RequestMapping("/welcome"))
-		</h3>
+		</h2>	
 	</div>
+	<form action="${pageContext.servletContext.contextPath}/createPoll">
+		<input type="submit" value="Submit">
+	</form>
 </body>
 </html>
