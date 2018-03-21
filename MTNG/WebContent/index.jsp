@@ -15,7 +15,8 @@ body {
 		</h2>
 	</div>
 	<form action="${pageContext.servletContext.contextPath}/createPoll">
-		<input type="submit" value="Submit">
+		First name: <input type="text" name="firstname"> <br> <input
+			type="submit" value="Submit">
 	</form>
 </body>
 </html>
