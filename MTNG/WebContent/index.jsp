@@ -1,6 +1,7 @@
+<!DOCTYPE html>
 <html>
 <head>
-<title>Spring MVC Tutorial Series by Crunchify.com</title>
+<title>MTNG Spring MVC </title>
 <style type="text/css">
 body {
 	background-image: url('https://crunchify.com/bg.png');
@@ -14,7 +15,7 @@ body {
 			Hello, this is the MTNG sample page.<br> <br>
 		</h2>
 	</div>
-	<form action="${pageContext.servletContext.contextPath}/createPoll">
+	<form action="${pageContext.servletContext.contextPath}/createPoll" method = "POST">
 		First name: <input type="text" name="firstname"> <br> <input
 			type="submit" value="Submit">
 	</form>

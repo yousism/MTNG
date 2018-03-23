@@ -26,6 +26,7 @@ public class MySQLAccess {
             // Statements allow to issue SQL queries to the database
             statement = connect.createStatement();
             // Result set get the result of the SQL query
+            /*
             resultSet = statement
                     .executeQuery("select * from feedback.comments");
             writeResultSet(resultSet);
@@ -57,7 +58,7 @@ public class MySQLAccess {
             resultSet = statement
             .executeQuery("select * from feedback.comments");
             writeMetaData(resultSet);
-
+	*/
         } catch (Exception e) {
             throw e;
         } finally {
