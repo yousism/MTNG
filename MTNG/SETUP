@@ -1,0 +1,8 @@
+To set up the mysql server on linux:
+
+1. Install mysql server locally and set root password to "sqluserpw#2018".
+2. Login to mysql with "mysql --user=root --password".
+   Enter the root password when asked and run "CREATE DATABASE mtng;".
+   Type "exit" to exit.
+3. Run "mysql --user=root --password mtng < pathtoscript" where pathtoscript
+   is the path to mtng.sql in the project.
