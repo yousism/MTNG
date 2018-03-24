@@ -14,7 +14,7 @@ body {
 			Hello, this is the MTNG sample page.<br> <br>
 		</h2>
 	</div>
-	<form action="${pageContext.servletContext.contextPath}/createPoll">
+	<form action="${pageContext.servletContext.contextPath}/test" method = "POST">
 		First name: <input type="text" name="firstname"> <br> <input
 			type="submit" value="Submit">
 	</form>
