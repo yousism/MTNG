@@ -4,11 +4,10 @@
 <head>
 
 <!-- let's add tag srping:url -->
-<spring:url value="/resources/crunchify.css" var="crunchifyCSS" />
 <spring:url value="/resources/index.js" var="indexJS" />
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<!--   <link href="${crunchifyCSS}" rel="stylesheet" />-->
+
 
 
 <!-- Finish adding tags -->
