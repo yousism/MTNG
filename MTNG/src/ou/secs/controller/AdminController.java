@@ -2,12 +2,42 @@ package ou.secs.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import org.springframework.web.bind.annotation.RequestParam;
 import ou.secs.dao.MySQLAccess;
+
+import java.sql.*;
 
 @Controller
 public class AdminController {
+
+    @PostMapping("/test")
+    public String test(@RequestParam String firstname) throws Exception {
+		Class.forName("com.mysql.jdbc.Driver");
+        Connection c = null;
+        Statement s;
+        PreparedStatement p = null;
+        try {
+            c = DriverManager.getConnection("jdbc:mysql://localhost:3306?user=root&password=sqluserpw#2018");
+            s = c.createStatement();
+            s.execute("USE mtng;");
+            p = c.prepareStatement("INSERT INTO Person (Person_ID, Person_name, isCreator) VALUE (42, ?, true);");
+            p.setString(1, firstname);
+            p.execute();
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            try {
+                if (p != null)
+                    p.close();
+                if (c != null)
+                    c.close();
+            } catch (SQLException e2) {}
+        }
+        return "welcome";
+    }
 
 	@RequestMapping(value = "/createPoll")
 	public String createPoll(ModelMap model) {
