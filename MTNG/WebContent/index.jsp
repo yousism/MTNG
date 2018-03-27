@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>MTNG Spring MVC </title>
+<title>MTNG Spring MVC</title>
 <style type="text/css">
 body {
 	background-image: url('https://crunchify.com/bg.png');
 }
 </style>
+<spring:url value="/resources/index.js" var="indexJS" />
+<script src="${indexJS}"></script>
+
 </head>
 <body>
 	<br>
@@ -15,9 +18,11 @@ body {
 			Hello, this is the MTNG sample page.<br> <br>
 		</h2>
 	</div>
-	<form action="${pageContext.servletContext.contextPath}/createPoll" method = "POST">
+	<form action="${pageContext.servletContext.contextPath}/goToPoll" method="GET">
 		First name: <input type="text" name="firstname"> <br> <input
 			type="submit" value="Submit">
 	</form>
+
+	<!--  <a href="${pageContext.servletContext.contextPath}/jsp/welcome.jsp">Click here to create a poll</a>-->
 </body>
 </html>

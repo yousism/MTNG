@@ -200,9 +200,29 @@ function sendDataToServer(survey) {
 	alert("The results are:" + JSON.stringify(survey.data));
 }
 
+function createPoll(survey) {
+	alert('Inside createPoll js function');
+	var poll = JSON.stringify(survey.data);
+	alert(poll);
+	// Send the request
+	$.ajax({
+		url : "http://localhost:8080/MTNG/createPoll",
+		type : 'POST',
+		data : poll,
+		contentType : 'application/json',
+		dataType : 'json',
+		success : function(data) {
+			alert(data);
+		},
+		error : function(data, status, er) {
+			alert("error: " + data + " status: " + status + " er:" + er);
+		}
+	});
+
+}
+
 var survey = new Survey.Model(surveyJSON);
 $("#surveyContainer").Survey({
 	model : survey,
-	onComplete : sendDataToServer
+	onComplete : createPoll
 });
-

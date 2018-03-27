@@ -2,17 +2,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+<title>MTNG Homepage</title>
 <!-- let's add tag srping:url -->
 <spring:url value="/resources/index.js" var="indexJS" />
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
-
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 
 <!-- Finish adding tags -->
 
-<title>MTNG Homepage</title>
+
 <script src="https://unpkg.com/jquery"></script>
 
 <script src="https://unpkg.com/survey-jquery"></script>
@@ -31,7 +32,7 @@
 	rel="stylesheet" />
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
-		
+
 </head>
 
 <body>
@@ -39,7 +40,7 @@
 	<div id="surveyElement"></div>
 	<div id="surveyResult"></div>
 	<div id="surveyContainer"></div>
-<script src="${indexJS}"></script>
+	<script src="${indexJS}"></script>
 </body>
 </html>
 
