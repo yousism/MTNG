@@ -1,7 +1,3 @@
-function isNumber(n) {
-    return n && !isNaN(parseFloat(n)) && isFinite(n);
-}
-
 function surveyValidateQuestion(s, options) {
     if (options.name == "times") {
     	for (i in options.value) {
