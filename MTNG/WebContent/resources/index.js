@@ -209,8 +209,9 @@ function createPoll(survey) {
 		url : "http://localhost:8080/MTNG/createPoll",
 		type : 'POST',
 		data : poll,
+		// contentType defines json which becomes @RequestBody in controller
+		// Without it, "unsupported media type" error appears
 		contentType : 'application/json',
-		dataType : 'json',
 		success : function(data) {
 			alert(data);
 		},

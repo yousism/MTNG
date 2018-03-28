@@ -3,9 +3,7 @@
 <head>
 <title>MTNG Spring MVC</title>
 <style type="text/css">
-body {
-	background-image: url('https://crunchify.com/bg.png');
-}
+body 
 </style>
 <spring:url value="/resources/index.js" var="indexJS" />
 <script src="${indexJS}"></script>
