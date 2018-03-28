@@ -235,25 +235,6 @@ var surveyJSON = {
 	} ]
 }
 
-var widget = {
-	    name: "datepicker",
-	    htmlTemplate: "<input class='widget-datepicker' type='text' style='width: 100%;'>",
-	    isFit : function(question) { return question.getType() === 'text' && question.inputType === 'date'; },
-	    afterRender: function(question, el) {
-
-	        var widget = $(el).find('.widget-datepicker').datepicker({dateFormat: question.dateFormat});
-
-	        widget.on("change", function (e) {
-	            question.value = $(this).val();
-	        });
-	        question.valueChangedCallback = function() {
-	            widget.datepicker('setDate', new Date(question.value));
-	        }
-	        widget.datepicker('setDate', new Date(question.value || Date.now));
-	    }
-	}
-	Survey.CustomWidgetCollection.Instance.addCustomWidget(widget);
-
 var survey = new Survey.Model(surveyJSON);
 
 survey.onComplete.add(function (result) {
