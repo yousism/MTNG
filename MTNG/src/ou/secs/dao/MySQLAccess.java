@@ -23,8 +23,9 @@ public class MySQLAccess {
 			// .getConnection("jdbc:mysql://localhost:3306?"
 			// + "user=root&password=sqluserpw#2018");
 
-			connect = DriverManager.getConnection("jdbc:mysql://mtngdb.cujiulgmjzc8.us-west-2.rds.amazonaws.com:3306?"
-					+ "user=nikita&password=nikita");
+			connect = DriverManager
+					.getConnection("jdbc:mysql://aa3plvnftmw56x.cujiulgmjzc8.us-west-2.rds.amazonaws.com:3306?"
+							+ "user=nikita&password=nikita");
 
 			// Statements allow to issue SQL queries to the database
 			statement = connect.createStatement();
