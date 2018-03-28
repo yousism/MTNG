@@ -1,27 +1,68 @@
+function isNumber(n) {
+    return n && !isNaN(parseFloat(n)) && isFinite(n);
+}
+
+function surveyValidateQuestion(s, options) {
+    if (options.name == "times") {
+    	for (i in options.value) {
+    		var tV = options.value[i];
+    		var fromDate = new Date(tV.fromDate + ' ' +  tV.fromHour + ':' + tV.fromMinute);
+        	var toDate = new Date(tV.toDate + ' ' +  tV.toHour + ':' + tV.toMinute);
+        	if (fromDate > toDate) {
+        		options.error = "Please ensure starting times are before ending times";
+        	}
+    	}
+    }
+}
+
 Survey.Survey.cssType = "bootstrap";
 
 var surveyJSON = {
-	"pages" : [ {
-		"name" : "page1",
-		"elements" : [ {
-			"type" : "text",
-			"name" : "name",
-			"title" : "Enter the event name:"
-		}, {
-			"type" : "text",
-			"name" : "location",
-			"title" : "Enter the event location:"
-		}, {
-			"type" : "matrixdynamic",
-			"name" : "pollTimeList",
-			"title" : "Select time options:",
-			"columns" : [ {
-				"name" : "startdate",
+	"pages" : [{
+        "name" : "page1", 
+        questions: [ {
+                type: "text",
+                name: "eventName",
+                title: "Please type the event name",
+                isRequired: true,
+            }, {
+                type: "text",
+                name: "locationName",
+                title: "Please type the location name",
+                isRequired: true
+            }, {
+                type: "text",
+                name: "email",
+                title: "Please type your e-mail",
+                isRequired: true,
+                validators: [
+                    {
+                        type: "email"
+                    }
+                ]
+            }
+        ]
+    }, {
+		"name" : "page2",
+		questions : [ {
+			type : "matrixdynamic",
+			name : "times",
+			title : "Select time options:",
+			validators: [
+                {
+                    type: "mytextvalidator"
+                }
+            ], 
+			columns : [ {
+				"name" : "fromDate",
 				"title" : "Starting:",
 				"cellType" : "text",
+				"isRequired" : true,
 				"inputType" : "date"
 			}, {
-				"name" : "starthours",
+				"name" : "fromHour",
+				"title" : "Hour:",
+				"isRequired" : true,
 				"cellType" : "dropdown",
 				"isRequired" : true,
 				"choices" : [ {
@@ -98,17 +139,20 @@ var surveyJSON = {
 					"text" : "11 PM"
 				} ]
 			}, {
-				"name" : "startminutes",
+				"name" : "fromMinute",
+				"title" : "Minutes:",
 				"cellType" : "dropdown",
 				"isRequired" : true,
 				"choices" : [ "0", "15", "30", "45" ]
 			}, {
-				"name" : "enddate",
+				"name" : "toDate",
+				"isRequired" : true,
 				"title" : "Ending:",
 				"cellType" : "text",
 				"inputType" : "date"
 			}, {
-				"name" : "endhours",
+				"name" : "toHour",
+				"title" : "Hour:",
 				"cellType" : "dropdown",
 				"isRequired" : true,
 				"choices" : [ {
@@ -185,45 +229,49 @@ var surveyJSON = {
 					"text" : "11 PM"
 				} ]
 			}, {
-				"name" : "endminutes",
+				"name" : "toMinute",
+				"title" : "Minutes:",
 				"cellType" : "dropdown",
 				"isRequired" : true,
 				"choices" : [ "0", "15", "30", "45" ]
-			} ],
-			"choices" : [ 1, 2, 3, 4, 5 ]
+			} ]
 		} ]
 	} ]
 }
 
-function sendDataToServer(survey) {
-	// send Ajax request to your web server.
-	alert("The results are:" + JSON.stringify(survey.data));
-}
+var widget = {
+	    name: "datepicker",
+	    htmlTemplate: "<input class='widget-datepicker' type='text' style='width: 100%;'>",
+	    isFit : function(question) { return question.getType() === 'text' && question.inputType === 'date'; },
+	    afterRender: function(question, el) {
 
-function createPoll(survey) {
-	alert('Inside createPoll js function');
-	var poll = JSON.stringify(survey.data);
-	alert(poll);
-	// Send the request
-	$.ajax({
-		url : "http://localhost:8080/MTNG/createPoll",
-		type : 'POST',
-		data : poll,
-		// contentType defines json which becomes @RequestBody in controller
-		// Without it, "unsupported media type" error appears
-		contentType : 'application/json',
-		success : function(data) {
-			alert(data);
-		},
-		error : function(data, status, er) {
-			alert("error: " + data + " status: " + status + " er:" + er);
-		}
-	});
+	        var widget = $(el).find('.widget-datepicker').datepicker({dateFormat: question.dateFormat});
 
-}
+	        widget.on("change", function (e) {
+	            question.value = $(this).val();
+	        });
+	        question.valueChangedCallback = function() {
+	            widget.datepicker('setDate', new Date(question.value));
+	        }
+	        widget.datepicker('setDate', new Date(question.value || Date.now));
+	    }
+	}
+	Survey.CustomWidgetCollection.Instance.addCustomWidget(widget);
 
 var survey = new Survey.Model(surveyJSON);
+
+survey.onComplete.add(function (result) {
+	document.querySelector('#surveyElement').innerHTML += result.data.locationName + "<br>" + result.data.eventName + "<br>" + result.data.email + "<br>";
+	var rDT = result.data.times;
+    for (i in rDT) {
+    	var fromDate = new Date(rDT[i].fromDate + ' ' +  rDT[i].fromHour + ':' + rDT[i].fromMinute);
+    	var toDate = new Date(rDT[i].toDate + ' ' +  rDT[i].toHour + ':' + rDT[i].toMinute);
+        document.querySelector('#surveyElement').innerHTML += "From: " + fromDate + "  to: " + toDate + "<br>";
+    }
+});
+
 $("#surveyContainer").Survey({
 	model : survey,
-	onComplete : createPoll
+	onValidateQuestion: surveyValidateQuestion
 });
+
