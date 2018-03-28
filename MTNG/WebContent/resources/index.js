@@ -5,23 +5,23 @@ var surveyJSON = {
 		"name" : "page1",
 		"elements" : [ {
 			"type" : "text",
-			"name" : "question1",
+			"name" : "name",
 			"title" : "Enter the event name:"
 		}, {
 			"type" : "text",
-			"name" : "question2",
+			"name" : "location",
 			"title" : "Enter the event location:"
 		}, {
 			"type" : "matrixdynamic",
-			"name" : "Please select time options",
+			"name" : "pollTimeList",
 			"title" : "Select time options:",
 			"columns" : [ {
-				"name" : "date",
+				"name" : "startdate",
 				"title" : "Starting:",
 				"cellType" : "text",
 				"inputType" : "date"
 			}, {
-				"name" : "Hours",
+				"name" : "starthours",
 				"cellType" : "dropdown",
 				"isRequired" : true,
 				"choices" : [ {
@@ -98,17 +98,17 @@ var surveyJSON = {
 					"text" : "11 PM"
 				} ]
 			}, {
-				"name" : "Minutes",
+				"name" : "startminutes",
 				"cellType" : "dropdown",
 				"isRequired" : true,
 				"choices" : [ "0", "15", "30", "45" ]
 			}, {
-				"name" : "date",
+				"name" : "enddate",
 				"title" : "Ending:",
 				"cellType" : "text",
 				"inputType" : "date"
 			}, {
-				"name" : "Hours",
+				"name" : "endhours",
 				"cellType" : "dropdown",
 				"isRequired" : true,
 				"choices" : [ {
@@ -185,7 +185,7 @@ var surveyJSON = {
 					"text" : "11 PM"
 				} ]
 			}, {
-				"name" : "Minutes",
+				"name" : "endminutes",
 				"cellType" : "dropdown",
 				"isRequired" : true,
 				"choices" : [ "0", "15", "30", "45" ]
