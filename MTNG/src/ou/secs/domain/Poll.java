@@ -1,14 +1,15 @@
 package ou.secs.domain;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Poll implements Serializable {
 
 	private String name;
 	private String location;
-	private Integer pollID;
-	private Integer personID;
-//	private List<TimeOptions> pollTimeList;
+	//private Integer pollID;
+	//private Integer personID;
+	private List<TimeOption> pollTimeList;
 
 	public String getName() {
 		return name;
@@ -26,7 +27,7 @@ public class Poll implements Serializable {
 		this.location = location;
 	}
 
-	public Integer getPollID() {
+/*	public Integer getPollID() {
 		return pollID;
 	}
 
@@ -40,6 +41,14 @@ public class Poll implements Serializable {
 
 	public void setPersonID(Integer personID) {
 		this.personID = personID;
+	}*/
+
+	public List<TimeOption> getPollTimeList() {
+		return pollTimeList;
+	}
+
+	public void setPollTimeList(List<TimeOption> pollTimeList) {
+		this.pollTimeList = pollTimeList;
 	}
 
 }
