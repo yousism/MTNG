@@ -2,9 +2,9 @@ function surveyValidateQuestion(s, options) {
     if (options.name == "times") {
     	for (i in options.value) {
     		var tV = options.value[i];
-    		var fromDate = new Date(tV.fromDate + ' ' +  tV.fromHour + ':' + tV.fromMinute);
-        	var toDate = new Date(tV.toDate + ' ' +  tV.toHour + ':' + tV.toMinute);
-        	if (fromDate > toDate) {
+    		var startdate = new Date(tV.startdate + ' ' +  tV.starthours + ':' + tV.startminutes);
+        	var enddate = new Date(tV.enddate + ' ' +  tV.endhours + ':' + tV.endminutes);
+        	if (startdate > enddate) {
         		options.error = "Please ensure starting times are before ending times";
         	}
     	}
@@ -50,13 +50,13 @@ var surveyJSON = {
                 }
             ], 
 			columns : [ {
-				"name" : "fromDate",
+				"name" : "startdate",
 				"title" : "Starting:",
 				"cellType" : "text",
 				"isRequired" : true,
 				"inputType" : "date"
 			}, {
-				"name" : "fromHour",
+				"name" : "starthours",
 				"title" : "Hour:",
 				"isRequired" : true,
 				"cellType" : "dropdown",
@@ -135,19 +135,19 @@ var surveyJSON = {
 					"text" : "11 PM"
 				} ]
 			}, {
-				"name" : "fromMinute",
+				"name" : "startminutes",
 				"title" : "Minutes:",
 				"cellType" : "dropdown",
 				"isRequired" : true,
 				"choices" : [ "0", "15", "30", "45" ]
 			}, {
-				"name" : "toDate",
+				"name" : "enddate",
 				"isRequired" : true,
 				"title" : "Ending:",
 				"cellType" : "text",
 				"inputType" : "date"
 			}, {
-				"name" : "toHour",
+				"name" : "endhours",
 				"title" : "Hour:",
 				"cellType" : "dropdown",
 				"isRequired" : true,
@@ -225,7 +225,7 @@ var surveyJSON = {
 					"text" : "11 PM"
 				} ]
 			}, {
-				"name" : "toMinute",
+				"name" : "endminutes",
 				"title" : "Minutes:",
 				"cellType" : "dropdown",
 				"isRequired" : true,
@@ -260,9 +260,9 @@ survey.onComplete.add(function (result) {
 	document.querySelector('#surveyElement').innerHTML += result.data.locationName + "<br>" + result.data.eventName + "<br>" + result.data.email + "<br>";
 	var rDT = result.data.times;
     for (i in rDT) {
-    	var fromDate = new Date(rDT[i].fromDate + ' ' +  rDT[i].fromHour + ':' + rDT[i].fromMinute);
-    	var toDate = new Date(rDT[i].toDate + ' ' +  rDT[i].toHour + ':' + rDT[i].toMinute);
-        document.querySelector('#surveyElement').innerHTML += "From: " + fromDate + "  to: " + toDate + "<br>";
+    	var startdate = new Date(rDT[i].startdate + ' ' +  rDT[i].starthours + ':' + rDT[i].startminutes);
+    	var enddate = new Date(rDT[i].enddate + ' ' +  rDT[i].endhours + ':' + rDT[i].endminutes);
+        document.querySelector('#surveyElement').innerHTML += "From: " + startdate + "  to: " + enddate + "<br>";
     }
 });
 
