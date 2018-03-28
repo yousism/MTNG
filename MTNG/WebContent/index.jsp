@@ -3,7 +3,7 @@
 <head>
 <title>MTNG Spring MVC</title>
 <style type="text/css">
-body 
+body
 </style>
 <spring:url value="/resources/index.js" var="indexJS" />
 <script src="${indexJS}"></script>
@@ -16,7 +16,8 @@ body
 			Hello, this is the MTNG sample page.<br> <br>
 		</h2>
 	</div>
-	<form action="${pageContext.servletContext.contextPath}/goToPoll" method="GET">
+	<form action="${pageContext.servletContext.contextPath}/goToPoll"
+		method="GET">
 		First name: <input type="text" name="firstname"> <br> <input
 			type="submit" value="Submit">
 	</form>
