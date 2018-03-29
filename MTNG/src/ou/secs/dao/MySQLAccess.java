@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class MySQLAccess {
-	public static void main(String[] argv) throws Exception {
+	public static void readDatabase() throws Exception {
 		String driverName = "org.gjt.mm.mysql.Driver";
 		Class.forName(driverName);
 
