@@ -237,15 +237,13 @@ var surveyJSON = {
 
 var survey = new Survey.Model(surveyJSON);
 
-survey.onComplete.add(function (result) {
-	document.querySelector('#surveyElement').innerHTML += result.data.locationName + "<br>" + result.data.eventName + "<br>" + result.data.email + "<br>";
-	var rDT = result.data.times;
-    for (i in rDT) {
-    	var startdate = new Date(rDT[i].startdate + ' ' +  rDT[i].starthours + ':' + rDT[i].startminutes);
-    	var enddate = new Date(rDT[i].enddate + ' ' +  rDT[i].endhours + ':' + rDT[i].endminutes);
-        document.querySelector('#surveyElement').innerHTML += "From: " + startdate + "  to: " + enddate + "<br>";
-    }
-});
+var dataToSend = {
+		eventName: "",
+		locationName: "",
+		email: "",
+		pollTimes: [ ]
+};
+
 
 $("#surveyContainer").Survey({
 	model : survey,
