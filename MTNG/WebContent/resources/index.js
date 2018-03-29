@@ -237,16 +237,30 @@ var surveyJSON = {
 
 var survey = new Survey.Model(surveyJSON);
 
-var dataToSend = {
-		eventName: "",
-		locationName: "",
-		email: "",
-		pollTimes: [ ]
+function createPoll(survey) {
+	alert('Inside createPoll js function');
+	var poll = JSON.stringify(survey.data);
+	alert(poll);
+	// Send the request
+	$.ajax({
+		url : "http://localhost:8080/MTNG/createPoll",
+		type : 'POST',
+		data : poll,
+		// contentType defines json which becomes @RequestBody in controller
+		// Without it, "unsupported media type" error appears
+		contentType : 'application/json',
+		success : function(data) {
+			alert(data);
+		},
+		error : function(data, status, er) {
+			alert("error: " + data + " status: " + status + " er:" + er);
+		}
+	});
 };
-
 
 $("#surveyContainer").Survey({
 	model : survey,
-	onValidateQuestion: surveyValidateQuestion
+	onValidateQuestion: surveyValidateQuestion,
+	onComplete: createPoll
 });
 
