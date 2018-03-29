@@ -20,12 +20,12 @@ var surveyJSON = {
 		"name" : "page1",
 		questions : [ {
 			type : "text",
-			name : "eventName",
+			name : "name",
 			title : "Please type the event name",
 			isRequired : true,
 		}, {
 			type : "text",
-			name : "locationName",
+			name : "location",
 			title : "Please type the location name",
 			isRequired : true
 		}, {
@@ -41,7 +41,7 @@ var surveyJSON = {
 		"name" : "page2",
 		questions : [ {
 			type : "matrixdynamic",
-			name : "times",
+			name : "pollTimeList",
 			title : "Select time options:",
 			validators : [ {
 				type : "mytextvalidator"

@@ -2,9 +2,14 @@ package ou.secs.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import ou.secs.domain.Poll;
 
 public class MySQLAccess {
-	public static void readDatabase() throws Exception {
+	public static Connection getConnection() throws Exception {
 		String driverName = "org.gjt.mm.mysql.Driver";
 		Class.forName(driverName);
 
@@ -19,5 +24,34 @@ public class MySQLAccess {
 		if (connection.isValid(5)) {
 			System.out.println(connection);
 		}
+		return connection;
+	}
+
+	public static void saveToDB(Poll poll) {
+		Connection c = null;
+		Statement s;
+		PreparedStatement p = null;
+		try {
+			c = getConnection();
+			// DriverManager.getConnection("jdbc:mysql://localhost:3306?user=root&password=sqluserpw#2018");
+			s = c.createStatement();
+			s.execute("USE mtng;");
+			p = c.prepareStatement("INSERT INTO Poll (Poll_Id, Name, Location) VALUE (?, ?, ?);");
+			p.setString(1, String.valueOf(Math.random()));
+			p.setString(2, poll.getName());
+			p.setString(3, poll.getLocation());
+			p.execute();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			try {
+				if (p != null)
+					p.close();
+				if (c != null)
+					c.close();
+			} catch (SQLException e2) {
+			}
+		}
+
 	}
 }

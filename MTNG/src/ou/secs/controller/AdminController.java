@@ -28,7 +28,7 @@ public class AdminController {
 		}
 		MySQLAccess dbAccessDao = new MySQLAccess();
 		try {
-			dbAccessDao.readDatabase();
+			dbAccessDao.saveToDB(poll);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

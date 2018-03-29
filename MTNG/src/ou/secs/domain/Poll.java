@@ -7,8 +7,9 @@ public class Poll implements Serializable {
 
 	private String name;
 	private String location;
-	//private Integer pollID;
-	//private Integer personID;
+	private String email;
+	// private Integer pollID;
+	// private Integer personID;
 	private List<TimeOption> pollTimeList;
 
 	public String getName() {
@@ -27,18 +28,20 @@ public class Poll implements Serializable {
 		this.location = location;
 	}
 
-/*	public Integer getPollID() {
-		return pollID;
+	public String getEmail() {
+		return email;
 	}
-	public void setPollID(Integer pollID) {
-		this.pollID = pollID;
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	public Integer getPersonID() {
-		return personID;
-	}
-	public void setPersonID(Integer personID) {
-		this.personID = personID;
-	}*/
+
+	/*
+	 * public Integer getPollID() { return pollID; } public void setPollID(Integer
+	 * pollID) { this.pollID = pollID; } public Integer getPersonID() { return
+	 * personID; } public void setPersonID(Integer personID) { this.personID =
+	 * personID; }
+	 */
 
 	public List<TimeOption> getPollTimeList() {
 		return pollTimeList;
