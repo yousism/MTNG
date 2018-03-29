@@ -234,25 +234,29 @@ var surveyJSON = {
 
 var survey = new Survey.Model(surveyJSON);
 
-survey.onComplete
-		.add(function(result) {
-			document.querySelector('#surveyElement').innerHTML += result.data.locationName
-					+ "<br>"
-					+ result.data.eventName
-					+ "<br>"
-					+ result.data.email + "<br>";
-			var rDT = result.data.times;
-			for (i in rDT) {
-				var startdate = new Date(rDT[i].startdate + ' '
-						+ rDT[i].starthours + ':' + rDT[i].startminutes);
-				var enddate = new Date(rDT[i].enddate + ' ' + rDT[i].endhours
-						+ ':' + rDT[i].endminutes);
-				document.querySelector('#surveyElement').innerHTML += "From: "
-						+ startdate + "  to: " + enddate + "<br>";
-			}
-		});
+function createPoll(survey) {
+	alert('Inside createPoll js function');
+	var poll = JSON.stringify(survey.data);
+	alert(poll);
+	// Send the request
+	$.ajax({
+		url : "http://localhost:8080/MTNG/createPoll",
+		type : 'POST',
+		data : poll,
+		// contentType defines json which becomes @RequestBody in controller
+		// Without it, "unsupported media type" error appears
+		contentType : 'application/json',
+		success : function(data) {
+			alert(data);
+		},
+		error : function(data, status, er) {
+			alert("error: " + data + " status: " + status + " er:" + er);
+		}
+	});
+};
 
 $("#surveyContainer").Survey({
 	model : survey,
-	onValidateQuestion : surveyValidateQuestion
+	onValidateQuestion : surveyValidateQuestion,
+	onComplete : createPoll
 });
