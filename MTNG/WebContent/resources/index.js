@@ -1,54 +1,51 @@
 function surveyValidateQuestion(s, options) {
-    if (options.name == "times") {
-    	for (i in options.value) {
-    		var tV = options.value[i];
-    		var startdate = new Date(tV.startdate + ' ' +  tV.starthours + ':' + tV.startminutes);
-        	var enddate = new Date(tV.enddate + ' ' +  tV.endhours + ':' + tV.endminutes);
-        	if (startdate > enddate) {
-        		options.error = "Please ensure starting times are before ending times";
-        	}
-    	}
-    }
+	if (options.name == "times") {
+		for (i in options.value) {
+			var tV = options.value[i];
+			var startdate = new Date(tV.startdate + ' ' + tV.starthours + ':'
+					+ tV.startminutes);
+			var enddate = new Date(tV.enddate + ' ' + tV.endhours + ':'
+					+ tV.endminutes);
+			if (startdate > enddate) {
+				options.error = "Please ensure starting times are before ending times";
+			}
+		}
+	}
 }
 
 Survey.Survey.cssType = "bootstrap";
 
 var surveyJSON = {
-	"pages" : [{
-        "name" : "page1", 
-        questions: [ {
-                type: "text",
-                name: "eventName",
-                title: "Please type the event name",
-                isRequired: true,
-            }, {
-                type: "text",
-                name: "locationName",
-                title: "Please type the location name",
-                isRequired: true
-            }, {
-                type: "text",
-                name: "email",
-                title: "Please type your e-mail",
-                isRequired: true,
-                validators: [
-                    {
-                        type: "email"
-                    }
-                ]
-            }
-        ]
-    }, {
+	"pages" : [ {
+		"name" : "page1",
+		questions : [ {
+			type : "text",
+			name : "eventName",
+			title : "Please type the event name",
+			isRequired : true,
+		}, {
+			type : "text",
+			name : "locationName",
+			title : "Please type the location name",
+			isRequired : true
+		}, {
+			type : "text",
+			name : "email",
+			title : "Please type your e-mail",
+			isRequired : true,
+			validators : [ {
+				type : "email"
+			} ]
+		} ]
+	}, {
 		"name" : "page2",
 		questions : [ {
 			type : "matrixdynamic",
 			name : "times",
 			title : "Select time options:",
-			validators: [
-                {
-                    type: "mytextvalidator"
-                }
-            ], 
+			validators : [ {
+				type : "mytextvalidator"
+			} ],
 			columns : [ {
 				"name" : "startdate",
 				"title" : "Starting:",
@@ -237,18 +234,25 @@ var surveyJSON = {
 
 var survey = new Survey.Model(surveyJSON);
 
-survey.onComplete.add(function (result) {
-	document.querySelector('#surveyElement').innerHTML += result.data.locationName + "<br>" + result.data.eventName + "<br>" + result.data.email + "<br>";
-	var rDT = result.data.times;
-    for (i in rDT) {
-    	var startdate = new Date(rDT[i].startdate + ' ' +  rDT[i].starthours + ':' + rDT[i].startminutes);
-    	var enddate = new Date(rDT[i].enddate + ' ' +  rDT[i].endhours + ':' + rDT[i].endminutes);
-        document.querySelector('#surveyElement').innerHTML += "From: " + startdate + "  to: " + enddate + "<br>";
-    }
-});
+survey.onComplete
+		.add(function(result) {
+			document.querySelector('#surveyElement').innerHTML += result.data.locationName
+					+ "<br>"
+					+ result.data.eventName
+					+ "<br>"
+					+ result.data.email + "<br>";
+			var rDT = result.data.times;
+			for (i in rDT) {
+				var startdate = new Date(rDT[i].startdate + ' '
+						+ rDT[i].starthours + ':' + rDT[i].startminutes);
+				var enddate = new Date(rDT[i].enddate + ' ' + rDT[i].endhours
+						+ ':' + rDT[i].endminutes);
+				document.querySelector('#surveyElement').innerHTML += "From: "
+						+ startdate + "  to: " + enddate + "<br>";
+			}
+		});
 
 $("#surveyContainer").Survey({
 	model : survey,
-	onValidateQuestion: surveyValidateQuestion
+	onValidateQuestion : surveyValidateQuestion
 });
-
