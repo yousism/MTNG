@@ -33,13 +33,11 @@ public class MySQLAccess {
 		PreparedStatement p = null;
 		try {
 			c = getConnection();
-			// DriverManager.getConnection("jdbc:mysql://localhost:3306?user=root&password=sqluserpw#2018");
 			s = c.createStatement();
 			s.execute("USE mtng;");
-			p = c.prepareStatement("INSERT INTO Poll (Poll_Id, Name, Location) VALUE (?, ?, ?);");
-			p.setString(1, String.valueOf(Math.random()));
-			p.setString(2, poll.getName());
-			p.setString(3, poll.getLocation());
+			p = c.prepareStatement("INSERT INTO Poll (Name, Location) VALUE (?, ?);");
+			p.setString(1, poll.getName());
+			p.setString(2, poll.getLocation());
 			p.execute();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

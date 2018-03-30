@@ -48,7 +48,7 @@ DROP TABLE IF EXISTS `Poll`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Poll` (
-  `Poll_ID` varchar(100) NOT NULL,
+  `Poll_ID` INT NOT NULL AUTO_INCREMENT,
   `Person_ID` varchar(100) DEFAULT NULL,
   `Name` varchar(100) DEFAULT NULL,
   `Location` varchar(100) DEFAULT NULL,
